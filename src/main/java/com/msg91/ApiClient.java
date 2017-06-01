@@ -15,6 +15,7 @@ public class ApiClient {
 
   private String authkey;
   private static final String API_BASE_PATH = "http://test.panel.msg91.com/api";
+  private MessageFactory messageFactory;
 
   public String getAuthkey() {
     return authkey;
@@ -22,6 +23,7 @@ public class ApiClient {
 
   public ApiClient(String authkey) {
     this.authkey = authkey;
+    this.messageFactory = MessageFactory.getInstance(this);
   }
 
   public Long getRouteBalance(MessageRoute route) throws Msg91Exception {
@@ -65,13 +67,12 @@ public class ApiClient {
     }
   }
 
-  public static String version() {
-    return "0.0.1-SNAPSHOT";
+  public MessageFactory messages() {
+    return this.messageFactory;
   }
 
-  public static void main(String[] args) throws Msg91Exception {
-    ApiClient apiClient = new ApiClient("87673A5TQsQbH57ce80ca");
-    System.out.println(apiClient.isValid());
+  public static String version() {
+    return "0.0.1-SNAPSHOT";
   }
 
 }
